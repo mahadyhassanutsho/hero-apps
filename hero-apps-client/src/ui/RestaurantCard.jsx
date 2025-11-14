@@ -1,7 +1,5 @@
 const RestaurantCard = ({ restaurant }) => {
-  //   console.log(Object.keys(restaurant).join(","));
-  const { id, name, logo, location, size, type, area, description } =
-    restaurant;
+  const { name, location } = restaurant;
 
   return (
     <div>

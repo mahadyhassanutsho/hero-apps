@@ -1,7 +1,6 @@
 import { Link, NavLink } from "react-router";
-// import logo from "../assets/logo.png";
 import Logo from "./Logo";
-import { BiBookContent, BiHome } from "react-icons/bi";
+import { BiHome } from "react-icons/bi";
 import { FaAppStore } from "react-icons/fa6";
 import { BsGithub } from "react-icons/bs";
 import { MdInstallDesktop } from "react-icons/md";
@@ -11,12 +10,12 @@ const Header = () => {
     <>
       <li>
         <NavLink to="/" className="text-gray-500 font-semibold">
-          <BiHome size={18} className=""></BiHome> Home
+          <BiHome size={18} className="" /> Home
         </NavLink>
       </li>
       <li>
         <NavLink to="/apps" className="text-gray-500 font-semibold">
-          <FaAppStore size={20}></FaAppStore> Apps
+          <FaAppStore size={20} /> Apps
         </NavLink>
       </li>
 
@@ -57,15 +56,15 @@ const Header = () => {
             </ul>
           </div>
           <Link to={"/"}>
-            <Logo></Logo>
+            <Logo />
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-5">{nav}</ul>
         </div>
         <div className="navbar-end">
-          <a className=" btn btn-secondary bg-gradient-to-r from-violate-500 to-blue-500">
-            <BsGithub></BsGithub> Contribute
+          <a className=" btn btn-secondary bg-linear-to-r from-violate-500 to-blue-500">
+            <BsGithub /> Contribute
           </a>
         </div>
       </div>

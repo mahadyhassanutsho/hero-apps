@@ -34,10 +34,10 @@ const AppCard = ({ app }) => {
       </div>
       <div className="flex justify-between flex-wrap">
         <div className="badge badge-soft badge-success ">
-          <GrDownload></GrDownload> {downloads}
+          <GrDownload /> {downloads}
         </div>
         <div className="badge badge-soft badge-secondary">
-          <FaStar></FaStar> {ratingAvg}
+          <FaStar /> {ratingAvg}
         </div>
       </div>
     </Link>

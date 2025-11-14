@@ -13,14 +13,14 @@ import { toast } from "react-toastify";
 const AppDetails = () => {
   const app = useLoaderData();
 
-  const [isInstalled, setisInstalled] = useState(false);
+  const [isInstalled, setIsInstalled] = useState(false);
 
   const { id } = useParams();
 
   useEffect(() => {
     const installedIds = JSON.parse(localStorage.getItem("apps")) || [];
     if (installedIds.indexOf(id) != -1) {
-      setisInstalled(true);
+      setIsInstalled(true);
     }
   }, [id]);
 
@@ -43,14 +43,14 @@ const AppDetails = () => {
   }, [ratings]);
 
   if (!app) {
-    return <NotFound message={"App Is Not Found"}></NotFound>;
+    return <NotFound message={"App Is Not Found"} />;
   }
 
   const handleInstall = () => {
     const installedIds = JSON.parse(localStorage.getItem("apps")) || [];
     installedIds.push(id);
     localStorage.setItem("apps", JSON.stringify(installedIds));
-    setisInstalled(true);
+    setIsInstalled(true);
     toast.success(`Yahoo ⚡!! ${title} Installed Successfully`);
     frame(3);
   };

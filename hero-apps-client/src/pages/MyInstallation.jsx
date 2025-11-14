@@ -45,7 +45,7 @@ const MyInstallation = () => {
       <div className="">
         <h2 className="text-4xl font-bold text-center text-primary flex justify-center gap-3">
           Your Installed Apps
-          <GrInstall size={48} className="text-secondary"></GrInstall>
+          <GrInstall size={48} className="text-secondary" />
         </h2>
         <p className="text-center text-gray-400">
           Explore All Trending Apps on the Market developed by us
@@ -71,11 +71,7 @@ const MyInstallation = () => {
       <div className="divider"></div>
       <div className=" grid grid-cols-1 gap-5">
         {myApps.map((app) => (
-          <InstallCard
-            key={app.id}
-            app={app}
-            onUninstall={onUninstall}
-          ></InstallCard>
+          <InstallCard key={app.id} app={app} onUninstall={onUninstall} />
         ))}
       </div>
     </div>

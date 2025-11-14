@@ -62,9 +62,7 @@ const AllAppsPage = () => {
           </select>
         </div>
       </div>
-      {/* Loading State */}
       <>
-        {/* Apps Grid */}
         <div className="w-11/12 mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-10 gap-5">
           {apps.length === 0 ? (
             <div className="col-span-full text-center py-10 space-y-10">

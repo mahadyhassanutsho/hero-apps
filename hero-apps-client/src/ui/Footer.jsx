@@ -44,16 +44,16 @@ const Footer = () => {
           <ul className="text-white flex gap-4 text-xl space-y-2">
             <li>
               {" "}
-              <FaFacebook></FaFacebook>
+              <FaFacebook />
             </li>
             <li>
-              <BsYoutube></BsYoutube>
+              <BsYoutube />
             </li>
             <li>
-              <BsTwitterX></BsTwitterX>
+              <BsTwitterX />
             </li>
             <li>
-              <ImInstagram></ImInstagram>
+              <ImInstagram />
             </li>
           </ul>
         </div>

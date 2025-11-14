@@ -10,7 +10,7 @@ const Stats = () => {
       <div className="stats stats-vertical lg:stats-horizontal  text-white py-10">
         <div className="stat space-y-3">
           <div className="stat-figure">
-            <IoDownload size={48}></IoDownload>
+            <IoDownload size={48} />
           </div>
           <div className="">Total Downloads</div>
           <div className="stat-value  text-5xl">29.6M</div>
@@ -19,7 +19,7 @@ const Stats = () => {
 
         <div className="stat space-y-3">
           <div className="stat-figure ">
-            <FaStar size={48}></FaStar>
+            <FaStar size={48} />
           </div>
           <div className=" text-white">Total Reviews</div>
           <div className="stat-value ">906K</div>
@@ -28,7 +28,7 @@ const Stats = () => {
 
         <div className="stat space-y-3">
           <div className="stat-figure ">
-            <IoLogoGooglePlaystore size={48}></IoLogoGooglePlaystore>
+            <IoLogoGooglePlaystore size={48} />
           </div>
           <div className="stat-title text-white">Active Apps</div>
           <div className="stat-value">132+</div>

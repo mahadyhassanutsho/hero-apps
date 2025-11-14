@@ -45,9 +45,15 @@ const database = client.db("hero-apps");
 const appsCollection = database.collection("apps");
 
 // API Routes
-app.get("/apps", async (_req, res) => {
+app.get("/apps", async (req, res) => {
   try {
-    const apps = await appsCollection.find().toArray();
+    const { limit = 0, skip = 0 } = req.query;
+    const apps = await appsCollection
+      .find()
+      .project({ description: 0 })
+      .limit(parseInt(limit))
+      .skip(parseInt(skip))
+      .toArray();
     res.json(apps);
   } catch (error) {
     console.error(error);

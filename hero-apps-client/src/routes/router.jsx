@@ -10,34 +10,30 @@ import ErrorPage from "../ui/Error404";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
-    errorElement: <ErrorPage></ErrorPage>,
-    hydrateFallbackElement: <LoadingPage></LoadingPage>,
+    element: <App />,
+    errorElement: <ErrorPage />,
+    hydrateFallbackElement: <LoadingPage />,
     children: [
       {
         path: "",
-        element: <Home></Home>,
-        loader: () => fetch("http://localhost:5000/apps"),
+        element: <Home />,
+        loader: () => fetch("http://localhost:8000/apps"),
       },
       {
         path: "/apps",
-        element: <AllAppsPage></AllAppsPage>,
-        loader: () => fetch("http://localhost:5000/apps?limit=10&skip=10"),
+        element: <AllAppsPage />,
+        loader: () => fetch("http://localhost:8000/apps?limit=10&skip=10"),
       },
       {
         path: "/apps/:id",
-        element: <AppDetails></AppDetails>,
+        element: <AppDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/apps/${params.id}`),
+          fetch(`http://localhost:8000/apps/${params.id}`),
       },
       {
         path: "/installations",
-        element: <MyInstallation></MyInstallation>,
-        loader: () => fetch("http://localhost:5000/apps"),
-      },
-      {
-        path: "/blogs",
-        element: <h2>Single Items</h2>,
+        element: <MyInstallation />,
+        loader: () => fetch("http://localhost:8000/apps"),
       },
     ],
   },

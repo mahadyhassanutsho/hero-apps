@@ -10,7 +10,7 @@ const OurApps = () => {
       <div className="">
         <h2 className="text-4xl font-bold text-center text-primary flex justify-center gap-3">
           Trending Apps
-          <FiTrendingUp size={48} className="text-secondary"></FiTrendingUp>
+          <FiTrendingUp size={48} className="text-secondary" />
         </h2>
         <p className="text-center text-gray-500">
           Explore All Trending Apps on the Market developed by us
@@ -18,18 +18,16 @@ const OurApps = () => {
       </div>
       <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-10 gap-5">
         {apps.slice(0, 8).map((app) => (
-          <AppCard key={app.id} app={app}></AppCard>
+          <AppCard key={app.id} app={app} />
         ))}
       </div>
       <div className="text-center">
-
         <Link
           to="/apps"
-          className="btn btn-wide  text-white hover:shadow-xl bg-gradient-to-tl to-[#632EE3] from-[#9F62F2] "
+          className="btn btn-wide  text-white hover:shadow-xl bg-linear-to-tl to-[#632EE3] from-[#9F62F2] "
         >
           Show All
         </Link>
-        
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-import { DiVisualstudio } from "react-icons/di";
 import logo from "../assets/logo.png";
 
 const LoadingPage = () => {

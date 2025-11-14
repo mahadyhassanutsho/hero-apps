@@ -9,7 +9,7 @@ export default function ErrorPage() {
   return (
     <>
       <header>
-        <Header></Header>
+        <Header />
       </header>
 
       <div className="flex flex-col items-center justify-center h-screen text-center p-5">

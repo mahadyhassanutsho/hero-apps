@@ -6,13 +6,13 @@ const Home = () => {
   return (
     <div>
       <section>
-        <Banner></Banner>
+        <Banner />
       </section>
-      <section className="py-10 bg-gradient-to-tl to-[#632EE3] from-[#9F62F2] ">
-        <Stats></Stats>
+      <section className="py-10 bg-linear-to-tl to-[#632EE3] from-[#9F62F2] ">
+        <Stats />
       </section>
       <section className="py-16">
-        <OurApps></OurApps>
+        <OurApps />
       </section>
     </div>
   );
