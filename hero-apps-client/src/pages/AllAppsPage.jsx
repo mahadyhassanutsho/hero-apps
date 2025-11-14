@@ -1,12 +1,29 @@
+import { useState, useEffect } from "react";
 import { DiVisualstudio } from "react-icons/di";
 import AppCard from "../ui/AppCard";
 
-import { useLoaderData } from "react-router";
-
 const AllAppsPage = () => {
-  const apps = useLoaderData();
+  const [apps, setApps] = useState([]);
+  const [totalApps, setTotalApps] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 10;
+
+  useEffect(() => {
+    fetch(
+      `http://localhost:8000/apps?limit=${limit}&skip=${limit * currentPage}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const { apps, total } = data;
+        setApps(apps);
+        setTotalApps(total);
+        setTotalPage(Math.floor(total / limit));
+      });
+  }, [currentPage]);
+
   return (
-    <div>
+    <div className="py-6">
       <title>All Apps | Hero Apps</title>
       {/* Header */}
       <div className="py-16">
@@ -22,7 +39,7 @@ const AllAppsPage = () => {
       <div className="w-11/12 mx-auto flex flex-col-reverse lg:flex-row gap-5 items-start justify-between lg:items-end mt-10">
         <div>
           <h2 className="text-lg underline font-bold">
-            ({apps.length}) Apps Found
+            ({totalApps}) Apps Found
           </h2>
         </div>
 
@@ -62,20 +79,29 @@ const AllAppsPage = () => {
           </select>
         </div>
       </div>
-      <>
-        <div className="w-11/12 mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-10 gap-5">
-          {apps.length === 0 ? (
-            <div className="col-span-full text-center py-10 space-y-10">
-              <h2 className="text-6xl font-semibold opacity-60">
-                No Apps Found
-              </h2>
-              <button className="btn btn-primary">Show All Apps</button>
-            </div>
-          ) : (
-            apps.map((app) => <AppCard key={app.id} app={app}></AppCard>)
-          )}
-        </div>
-      </>
+      <div className="w-11/12 mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-10 gap-5">
+        {apps.length === 0 ? (
+          <div className="col-span-full text-center py-10 space-y-10">
+            <h2 className="text-6xl font-semibold opacity-60">No Apps Found</h2>
+            <button className="btn btn-primary">Show All Apps</button>
+          </div>
+        ) : (
+          apps.map((app) => <AppCard key={app.id} app={app}></AppCard>)
+        )}
+      </div>
+
+      <div className="w-11/12 mx-auto join flex flex-wrap items-center justify-center">
+        {Array.from({ length: totalPage }).map((_, i) => (
+          <button
+            className={`btn join-item ${
+              i + 1 === currentPage ? "btn-active" : ""
+            }`}
+            onClick={() => setCurrentPage(i + 1)}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

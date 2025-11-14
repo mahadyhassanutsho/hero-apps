@@ -48,13 +48,14 @@ const appsCollection = database.collection("apps");
 app.get("/apps", async (req, res) => {
   try {
     const { limit = 0, skip = 0 } = req.query;
+    const total = await appsCollection.countDocuments();
     const apps = await appsCollection
       .find()
       .project({ description: 0 })
       .limit(parseInt(limit))
       .skip(parseInt(skip))
       .toArray();
-    res.json(apps);
+    res.json({ apps, total });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error", error });

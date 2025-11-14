@@ -22,7 +22,6 @@ const router = createBrowserRouter([
       {
         path: "/apps",
         element: <AllAppsPage />,
-        loader: () => fetch("http://localhost:8000/apps?limit=10&skip=10"),
       },
       {
         path: "/apps/:id",
