@@ -6,36 +6,48 @@ const AllAppsPage = () => {
   const [apps, setApps] = useState([]);
   const [totalApps, setTotalApps] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
+
   const [currentPage, setCurrentPage] = useState(1);
+  const [sort, setSort] = useState(null);
+  const [order, setOrder] = useState(null);
+
   const limit = 10;
 
+  const handleSelectChange = (e) => {
+    const [s, o] = e.target.value.split("-");
+    setSort(s);
+    setOrder(o);
+    setCurrentPage(1);
+  };
+
   useEffect(() => {
-    fetch(
-      `http://localhost:8000/apps?limit=${limit}&skip=${limit * currentPage}`
-    )
+    const skip = limit * (currentPage - 1);
+
+    let url = `http://localhost:8000/apps?limit=${limit}&skip=${skip}`;
+    if (sort) url += `&sort=${sort}`;
+    if (order) url += `&order=${order}`;
+
+    fetch(url)
       .then((res) => res.json())
-      .then((data) => {
-        const { apps, total } = data;
+      .then(({ apps, total }) => {
         setApps(apps);
         setTotalApps(total);
-        setTotalPage(Math.floor(total / limit));
+        setTotalPage(Math.ceil(total / limit));
       });
-  }, [currentPage]);
+  }, [currentPage, sort, order]);
 
   return (
     <div className="py-6">
       <title>All Apps | Hero Apps</title>
-      {/* Header */}
       <div className="py-16">
         <h2 className="text-4xl font-bold text-center text-primary flex justify-center gap-3">
           Our All Applications
-          <DiVisualstudio size={48} className="text-secondary"></DiVisualstudio>
+          <DiVisualstudio size={48} className="text-secondary" />
         </h2>
         <p className="text-center text-gray-400">
           Explore All Apps on the Market developed by us. We code for Millions
         </p>
       </div>
-      {/* Search and Count */}
       <div className="w-11/12 mx-auto flex flex-col-reverse lg:flex-row gap-5 items-start justify-between lg:items-end mt-10">
         <div>
           <h2 className="text-lg underline font-bold">
@@ -65,7 +77,7 @@ const AllAppsPage = () => {
           </label>
         </form>
 
-        <div className="">
+        <div className="" onChange={handleSelectChange}>
           <select className="select bg-white">
             <option disabled={true}>Sort by R / S / D</option>
             <option value={"rating-desc"}>Ratings : High - Low</option>
@@ -85,7 +97,7 @@ const AllAppsPage = () => {
             <button className="btn btn-primary">Show All Apps</button>
           </div>
         ) : (
-          apps.map((app) => <AppCard key={app.id} app={app}></AppCard>)
+          apps.map((app) => <AppCard key={app._id} app={app} />)
         )}
       </div>
 

@@ -47,10 +47,12 @@ const appsCollection = database.collection("apps");
 // API Routes
 app.get("/apps", async (req, res) => {
   try {
-    const { limit = 0, skip = 0 } = req.query;
+    const { limit = 0, skip = 0, sort, order } = req.query;
+    const sortOptions = { [sort]: order === "asc" ? 1 : -1 };
     const total = await appsCollection.countDocuments();
     const apps = await appsCollection
       .find()
+      .sort(sortOptions)
       .project({ description: 0 })
       .limit(parseInt(limit))
       .skip(parseInt(skip))
