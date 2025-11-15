@@ -10,22 +10,32 @@ const AllAppsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sort, setSort] = useState(null);
   const [order, setOrder] = useState(null);
+  const [search, setSearch] = useState(null);
 
   const limit = 10;
 
-  const handleSelectChange = (e) => {
+  const handleSort = (e) => {
     const [s, o] = e.target.value.split("-");
     setSort(s);
     setOrder(o);
     setCurrentPage(1);
   };
 
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
   useEffect(() => {
     const skip = limit * (currentPage - 1);
 
-    let url = `http://localhost:8000/apps?limit=${limit}&skip=${skip}`;
-    if (sort) url += `&sort=${sort}`;
-    if (order) url += `&order=${order}`;
+    const url = [
+      `http://localhost:8000/apps?limit=${limit}&skip=${skip}`,
+      sort ? `sort=${sort}` : "",
+      order ? `order=${order}` : "",
+      search ? `search=${search}` : "",
+    ]
+      .filter(Boolean)
+      .join("&");
 
     fetch(url)
       .then((res) => res.json())
@@ -34,7 +44,7 @@ const AllAppsPage = () => {
         setTotalApps(total);
         setTotalPage(Math.ceil(total / limit));
       });
-  }, [currentPage, sort, order]);
+  }, [currentPage, sort, order, search]);
 
   return (
     <div className="py-6">
@@ -73,11 +83,16 @@ const AllAppsPage = () => {
                 <path d="m21 21-4.3-4.3"></path>
               </g>
             </svg>
-            <input type="search" className="" placeholder="Search Apps" />
+            <input
+              type="search"
+              className=""
+              placeholder="Search Apps"
+              onChange={handleSearch}
+            />
           </label>
         </form>
 
-        <div className="" onChange={handleSelectChange}>
+        <div className="" onChange={handleSort}>
           <select className="select bg-white">
             <option disabled={true}>Sort by R / S / D</option>
             <option value={"rating-desc"}>Ratings : High - Low</option>

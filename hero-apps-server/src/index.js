@@ -47,11 +47,12 @@ const appsCollection = database.collection("apps");
 // API Routes
 app.get("/apps", async (req, res) => {
   try {
-    const { limit = 0, skip = 0, sort, order } = req.query;
+    const { limit = 0, skip = 0, sort, order, search = "" } = req.query;
     const sortOptions = { [sort]: order === "asc" ? 1 : -1 };
-    const total = await appsCollection.countDocuments();
+    const query = search ? { title: { $regex: search, $options: "i" } } : {};
+    const total = await appsCollection.countDocuments(query);
     const apps = await appsCollection
-      .find()
+      .find(query)
       .sort(sortOptions)
       .project({ description: 0 })
       .limit(parseInt(limit))
