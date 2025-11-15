@@ -6,15 +6,15 @@ import { toast } from "react-toastify";
 
 const MyInstallation = () => {
   const [myAppsIds] = useState(JSON.parse(localStorage.getItem("apps")) || []);
-  const allApps = useLoaderData();
+  const { apps: allApps } = useLoaderData();
   const [myApps, setMyApps] = useState([]);
 
   useEffect(() => {
     const apps = [];
     myAppsIds.forEach((id) => {
-      const isExist = allApps.find((app) => app._id == id);
-      if (isExist) {
-        apps.push(isExist);
+      const exists = allApps.find((app) => app._id == id);
+      if (exists) {
+        apps.push(exists);
       }
     });
     setMyApps(apps);

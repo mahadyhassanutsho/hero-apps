@@ -3,7 +3,7 @@ import { Link, useLoaderData } from "react-router";
 import AppCard from "./AppCard";
 
 const OurApps = () => {
-  const apps = useLoaderData();
+  const { apps } = useLoaderData();
 
   return (
     <div>

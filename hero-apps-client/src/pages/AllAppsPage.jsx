@@ -67,9 +67,7 @@ const AllAppsPage = () => {
 
         <div className="">
           <select className="select bg-white">
-            <option selected disabled={true}>
-              Sort by <span className="text-xs">R / S / D</span>
-            </option>
+            <option disabled={true}>Sort by R / S / D</option>
             <option value={"rating-desc"}>Ratings : High - Low</option>
             <option value={"rating-asc"}>Ratings : Low - High</option>
             <option value={"size-desc"}>Size : High - Low</option>
@@ -79,6 +77,7 @@ const AllAppsPage = () => {
           </select>
         </div>
       </div>
+
       <div className="w-11/12 mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-10 gap-5">
         {apps.length === 0 ? (
           <div className="col-span-full text-center py-10 space-y-10">
@@ -90,9 +89,19 @@ const AllAppsPage = () => {
         )}
       </div>
 
-      <div className="w-11/12 mx-auto join flex flex-wrap items-center justify-center">
+      <div className="w-11/12 mx-auto join flex flex-wrap items-center justify-center gap-2">
+        {currentPage > 1 && (
+          <button
+            className="btn join-item btn-outline"
+            onClick={() => setCurrentPage(currentPage - 1)}
+          >
+            « Prev
+          </button>
+        )}
+
         {Array.from({ length: totalPage }).map((_, i) => (
           <button
+            key={i}
             className={`btn join-item ${
               i + 1 === currentPage ? "btn-active" : ""
             }`}
@@ -101,6 +110,15 @@ const AllAppsPage = () => {
             {i + 1}
           </button>
         ))}
+
+        {currentPage < totalPage && (
+          <button
+            className="btn join-item btn-outline"
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            Next »
+          </button>
+        )}
       </div>
     </div>
   );
